@@ -27,7 +27,7 @@ public class FirstConnection {
 		String url = "jdbc:postgresql://192.168.1.10/db4app?user=estadocidade_app&password=estadocidade_app_pw";
 		try {
 			Connection conn = DriverManager.getConnection( url );
-			System.out.println( "Conexao estabelecida com sucesso!" );
+			System.out.println( "Conexão estabelecida com sucesso!" );
 		} catch (SQLException e) {
 			System.out.println( "Ops, não conseguimos estabelecer conexão." );
 			e.printStackTrace();
