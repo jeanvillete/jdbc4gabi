@@ -67,5 +67,10 @@ ALTER SEQUENCE estadocidade_schm.cidade_seq OWNED BY estadocidade_schm.cidade.ci
 */
 
 /*
+* Alterando search_path do usuário estadocidade_usr para procurar também no schema estadocidade_schm
+*/
+ALTER ROLE estadocidade_usr SET search_path TO "$user",public,estadocidade_schm;
+
+/*
 * $postgres# \q
 */
