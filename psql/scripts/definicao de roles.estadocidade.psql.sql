@@ -23,11 +23,5 @@ CREATE ROLE estadocidade_app WITH LOGIN ENCRYPTED PASSWORD 'estadocidade_app_pw'
 */
 
 /*
-Obs.: Por mais que ja havia sido definido |application ROLE admin| na criação da ROLE application, é necessário reforçar essa definição 
-na criação dos usuário para a ROLE application.
-*/
-
-
-/*
 * $postgres# \q
 */
