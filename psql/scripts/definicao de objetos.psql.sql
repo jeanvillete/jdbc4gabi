@@ -1,6 +1,12 @@
 /*
 * $psql -d template1 -U jean
+
+-->A criação de um banco de dados no PostgreSQL é um pouco diferente dos outros SGBDs conhecidos.
+Quando criamos um novo banco o que estamos fazendo na realidade é uma cópia da estrutura de um outro banco.
+Na instalação do PostgreSQL ele traz dois bancos templates, template0 que é o banco "vazio", ou seja, com a estrutura mais básica
+e o template1 que traz consigo todas as opções que foram escolhidas no momento da instalação do PostgreSQL.
 */
+
 SET ROLE admin;
 
 /*

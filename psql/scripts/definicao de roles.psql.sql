@@ -1,8 +1,13 @@
-/*
+/* UTILIZANDO O POSTGRESQL
 * Nota: Comandos após cerquilha (jogo da velha)
-*
-* Dica 1: Para abrir uma sessão com psql, digite o comando a seguir e então pressione o Enter, após você será questionado sobre a senha correspondente;
+-->psql: é um cliente no modo terminal do PostgreSQL, que disponibiliza vários comandos e funcionalidades
+semelhantes ao interpretador de comandos Shell. Acessado pelo Prompt de comando (cmd) do windows.
+
+--> Em um determinado momento da instalação do banco de dados sera preciso definir: meubancodedados, host(localhost), porta(5432) meuusuario e senha. 
+
+* Dica 1: Para abrir uma sessão com psql, digite o comando a seguir e então pressione o Enter. Depois disso, você será questionado sobre a senha correspondente;
 *   psql -d meubancodedados -U meuusuario
+** Obs.: Outra opção para abrir uma sessão com psql, é utilizar um prompt (SQL Shell).
 *
 * Dica 2: Quando quiser sair do programa psql, o comando é;
 * # \q
@@ -21,16 +26,38 @@
 * Nota 6: Para ver as bases de dados disponíveis para o usuário corrente;
 * # \l
 *
-* Nota 6: Para ver quais são as grants atuais para determinada tabela;
+* Nota 6.1: Para ver quais são as grants atuais para determinada tabela;
 * # \dp nometabela;
 */
 
+
 /*
+-->Para iniciar a estruturação do banco, é necessario criar um ROLE. O ROLE é uma entidade que pode assumir o papel tanto de um agrupador de privilégios,
+quanto de usuário (onde nesse caso é atribuida uma senha).
+
 * Definição role admin, com direitos/privilégios de criação de bases de dados, criação de novas roles e replicação, porém sem privilégio de LOGIN com esta role.
 * Lembrando que esta é a definição de uma role e não um usuário de fato. A role neste sentindo é a definição de privilégios para um grupo, onde o meu usuário (com privilégio de LOGIN) em um segundo momento será inserido neste grupo.
 * http://www.postgresql.org/docs/9.4/static/sql-createrole.html
 */
 CREATE ROLE admin WITH NOSUPERUSER CREATEDB CREATEROLE REPLICATION NOINHERIT NOLOGIN;
+
+/*
+-->Onde:
+°NOSUPERUSER/SUPERUSER: Esta cláusula determina se o novo ROLE é um "superusuário", o qual pode passar por cima de todas as restrições de acesso dos bancos de dados.
+Sendo assim, é um status perigoSO.
+
+°CREATEDB/NOCREATEDB: Esta cláusula define a permissão para o ROLE criar bancos de dados.
+
+°CREATEROLE/NOCREATEROLE: Esta cláusula determina se o ROLE terá permissão para criar(alterar e remover inclusive) novos ROLES.
+
+°REPLICATION: Controle de dados para backup(latencia).
+
+°INHERIT/NOINHERIT: Esta cláusula determina se o ROLE "herda" os privilégios dos ROLES dos quais é membro. Sem INHERIT, o status de membro de outro ROLE apenas concede o direito de utilizar o comando SET ROLE especificando este outro ROLE; os privilégios deste outro papel só se tornarão disponíveis após executar SET ROLE. Se nenhuma destas duas cláusulas for especificada, o padrão é INHERIT.
+
+°LOGIN/NOLOGIN: Esta cláusula determina se o ROLE pode estabelecer uma conexão (log in). Considerado assim como sendo um usuário.
+
+obs: Quando nao especificada uma claúsula, por padrão admite-se NOCLAUSULA com excessao do INHERIT.
+*/
 
 /*
 * Criação do meu usuário, que antes de mais nada tenha permissão de fazer login.
@@ -61,8 +88,8 @@ GRANT admin TO jean;
 REVOKE ALL PRIVILEGES ON DATABASE postgres FROM public;
 
 /*
-* Neste momento não deveríamos mais usar o usuário postgres(root/superuser), mas sim passar a usar o novo usuário/role com privilégios de admin.
-* Lembrando que este usuário pode até ser usado para criação de novos usuários, então deveríamos deixar usuário postgres(que é um superuser) para realização de operações realmente necessárias, o que são bastante raras.
+* Neste momento não deveríamos mais usar o usuário postgres(root/superuser), mas sim passar a usar o novo usuário(jean) com privilégios de admin.
+* Lembrando que este usuário pode até ser usado para criação de novos usuários, então deveríamos deixar usuário postgres(que é um superuser) para realização de operações realmente necessárias, o que são bastante raras. Prezando sempre pela segurança do Banco de Dados.
 *
 * Fazer logoff do usuário postgres, e a partir de agora fazer login (para fins de administração) com usuário para este fim, no meu caso, usuário 'jean'. 
 * $postgres# \q
