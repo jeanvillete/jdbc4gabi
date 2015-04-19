@@ -46,5 +46,4 @@ public class SampleInsert extends ConnectionData {
 		System.out.println( "SampleInsert - usage" );
 		System.out.println( "\tSampleInsert estadoNome estadoUf" );
 	}
-	
 }
