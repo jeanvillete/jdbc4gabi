@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class ConnectionData {
 
-	private String hostname = "192.168.1.10";
+	private String hostname = "localhost";
 	private String portNumber = "5432";
 	private String database = "db4app";
 	private String userName = "estadocidade_app";
@@ -16,6 +16,5 @@ public class ConnectionData {
 		String url = "jdbc:postgresql://" + hostname + ":" + portNumber + "/" + database + "?user=" + userName + "&password=" + password;
 		Connection conn = DriverManager.getConnection( url );
 		return conn;
-	}
-	
+	}	
 }

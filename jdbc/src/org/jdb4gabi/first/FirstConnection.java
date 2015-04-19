@@ -24,12 +24,12 @@ public class FirstConnection {
 //		props.setProperty("ssl","true");
 //		Connection conn = DriverManager.getConnection(url, props);
 
-		String url = "jdbc:postgresql://192.168.1.10/db4app?user=estadocidade_app&password=estadocidade_app_pw";
+		String url = "jdbc:postgresql://localhost/db4app?user=estadocidade_app&password=estadocidade_app_pw";
 		try {
 			Connection conn = DriverManager.getConnection( url );
-			System.out.println( "Conexão estabelecida com sucesso!" );
+			System.out.println( "Conexao estabelecida com sucesso!" );
 		} catch (SQLException e) {
-			System.out.println( "Ops, não conseguimos estabelecer conexão." );
+			System.out.println( "Ops, nao conseguimos estabelecer conexao." );
 			e.printStackTrace();
 		}
 	}

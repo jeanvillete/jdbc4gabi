@@ -32,6 +32,7 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON estadocidade_schm.cidade TO estadocidade
 * Alterando search_path do usuário estadocidade_app para procurar também no schema estadocidade_schm
 */
 ALTER ROLE estadocidade_app SET search_path TO "$user",public,estadocidade_schm;
+//ALTER ROLE estadocidade_app SET search_path TO estadocidade_schm;
 
 /*
 * $postgres# \q
